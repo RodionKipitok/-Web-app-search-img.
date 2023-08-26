@@ -1,0 +1,128 @@
+
+/* Шаблон карты  */
+
+/* <div class="photo-card">
+  <img src="" alt="" loading="lazy" />
+  <div class="info">
+    <p class="info-item">
+      <b>Likes</b>
+    </p>
+    <p class="info-item">
+      <b>Views</b>
+    </p>
+    <p class="info-item">
+      <b>Comments</b>
+    </p>
+    <p class="info-item">
+      <b>Downloads</b>
+    </p>
+  </div>
+</div> */
+
+
+a{
+	color: inherit;
+	text-decoration: none;
+}
+
+img{
+	max-width: 100%;
+}
+
+body{
+	font-family: sans-serif;
+	background-color: rgb(239, 239,239);
+
+}
+
+
+.search-form{
+  display: flex;
+  justify-content: center;
+}
+
+
+.search-form button {
+  margin-left: 5px;
+}
+
+.gallery{
+ display: grid;
+ grid-template-columns: 23% 25% 25% 25%;
+ grid-gap: 8px;
+ margin-top: 8px;
+ 
+}
+
+
+.photo-card{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card__img{
+	width: 100%;
+	height: 180px;
+	object-fit: cover;
+}
+
+
+.info {
+  display: flex; /* Устанавливаем контейнеру свойство display: flex */
+  flex-wrap: nowrap; /* Запрещаем перенос элементов на новую строку (nowrap) */
+  justify-content: space-between; /* Равномерное распределение между элементами */
+
+  
+}
+
+.info-item {
+  flex: 1; /* Распределяем доступное пространство равномерно между элементами (1 часть на каждый элемент) */
+  text-align: center; /* Центрируем текст внутри элементов */
+  font-size: 12px;
+  /* border: 1px solid #ccc; Добавляем границы для видимости разделения столбцов */
+  padding: 10px; /* Добавляем отступы вокруг элементов */
+}
+
+
+
+
+
+.load-more{
+  display: none;
+  margin: 15px auto;
+  box-sizing: border-box;
+  border-radius: 9px;
+  color: white;
+  background-color: gray;
+ 
+
+}
+
+
+.load-more:hover{
+ background-color:rgb(80, 65, 65);
+}
+
+
+#myBtn {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background: transparent no-repeat center center;
+  background-size: 100% 100%;
+  background-color:gray; /* Set a background color */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23fff' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z'/%3E%3C/svg%3E");
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px; /* Some padding */
+  top: 526px;
+  border-radius: 10px; /* Rounded corners */
+  font-size: 18px; /* Increase font size */
+}
+
+#myBtn:hover {
+  background-color:rgb(80, 65, 65); /* Add a dark-grey background on hover */
+}
