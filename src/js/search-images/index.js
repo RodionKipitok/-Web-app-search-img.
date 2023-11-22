@@ -10,8 +10,8 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 
 const saerchInput = document.querySelector('input');
 const searchButton = document.querySelector('button');
-const loadMorebtn  = document.querySelector('.load-more');
-const containerImgescard =  document.querySelector('.gallery');
+const loadMorebtn = document.querySelector('.load-more');
+const containerImgescard = document.querySelector('.gallery');
 const searchForm = document.querySelector('.search-form');
 
 
@@ -20,35 +20,39 @@ const searchForm = document.querySelector('.search-form');
 function renderImagescard(arr) {
 
 	const markup = arr.map(item => {
-      return `<div class="photo-card">
+		return `<div class="photo-card">
 		<a href="${item.webformatURL}">
 		<img src="${item.largeImageURL}" alt="${item.tags}" loading="lazy" class="card__img" />
 		</a>
 		<div class="info">
 		  <p class="info-item">
-			 <b>Likes</b>
+			 
 			 ${item.likes}
 		  </p>
+		  <b class='info-text'>Likes</b>
 		  <p class="info-item">
-			 <b>Views</b>
+			
 			 ${item.views}
 		  </p>
+		  <b class='info-text'>Views</b>
 		  <p class="info-item">
-			 <b>Comments</b>
+			 
 			 ${item.comments}
 		  </p>
+		  <b class='info-text'>Comments</b>
 		  <p class="info-item">
-			 <b>Downloads</b>
+			
 			 ${item.downloads}
 		  </p>
+		  <b class='info-text'>Downloads</b>
 		</div>
 	 </div>`
 
 
 	}).join(" ");
 
-containerImgescard.insertAdjacentHTML("beforeend", markup);
-	
+	containerImgescard.insertAdjacentHTML("beforeend", markup);
+
 };
 
 const lightbox = new SimpleLightbox('.photo-card  a', {
@@ -72,61 +76,61 @@ async function onSubmitsearchForm(event) {
 	currentPage = 1;
 
 
-	const response = await fetchImages(searchQuery,currentPage);
+	const response = await fetchImages(searchQuery, currentPage);
 	currentHits = response.hits.length;
 
 
 
-	
+
 
 	console.log(searchQuery);
 
-    if(searchQuery === ''){
+	if (searchQuery === '') {
 		return
-	 }
+	}
 
-    try {
-		
-     if(response.totalHits > 0){
-		 Notify.success(`Hooray! We found ${response.totalHits} images.`);
-       containerImgescard.innerHTML = '';
-		 renderImagescard(response.hits);
-		 lightbox.refresh();
-       loadMorebtn.style.display = 'block';
-     
-	  }
+	try {
 
-	  if(response.totalHits === 0){
-      containerImgescard.innerHTML = '';
-		Notify.info(`Sorry, there are no images matching your search query. Please try again.`)
-      loadMorebtn.style.display = 'none';
-	  }
+		if (response.totalHits > 0) {
+			Notify.success(`Hooray! We found ${response.totalHits} images.`);
+			containerImgescard.innerHTML = '';
+			renderImagescard(response.hits);
+			lightbox.refresh();
+			loadMorebtn.style.display = 'block';
+
+		}
+
+		if (response.totalHits === 0) {
+			containerImgescard.innerHTML = '';
+			Notify.info(`Sorry, there are no images matching your search query. Please try again.`)
+			loadMorebtn.style.display = 'none';
+		}
 
 
-	 } catch (error) {
+	} catch (error) {
 
 		console.log(error);
-	 }
+	}
 
-	
+
 };
 
-loadMorebtn.addEventListener('click',onClickloadMorebtn);
+loadMorebtn.addEventListener('click', onClickloadMorebtn);
 
 async function onClickloadMorebtn() {
 
 	currentPage += 1;
-	const response = await fetchImages(searchQuery,currentPage);
+	const response = await fetchImages(searchQuery, currentPage);
 	renderImagescard(response.hits);
 	lightbox.refresh();
 	currentHits += response.hits.length;
-   
+
 	if (currentHits === response.totalHits) {
 
 		loadMorebtn.style.display = 'none';
-		
+
 	};
-	
+
 };
 
 
@@ -135,22 +139,22 @@ const btnTop = document.getElementById('myBtn');
 console.log(btnTop);
 
 // When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function() {scrollFunction()};
+window.onscroll = function () { scrollFunction() };
 
 function scrollFunction() {
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        document.getElementById("myBtn").style.display = "block";
-    } else {
-        document.getElementById("myBtn").style.display = "none";
-    }
+	if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+		document.getElementById("myBtn").style.display = "block";
+	} else {
+		document.getElementById("myBtn").style.display = "none";
+	}
 }
 
-btnTop.addEventListener('click',topFunction);
+btnTop.addEventListener('click', topFunction);
 
 // When the user clicks on the button, scroll to the top of the document
 function topFunction() {
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	document.body.scrollTop = 0; // For Safari
+	document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
 
 
